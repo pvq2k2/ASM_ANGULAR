@@ -1,0 +1,52 @@
+<main class="mt-4 row position-relative">
+  <div class="col border rounded p-5">
+    <h2 class="mb-3 text-center">Đăng ký</h2>
+    <form class="d-flex justify-content-center flex-column">
+      <div class="mb-3">
+        <label for="fullName" class="form-label">Họ và tên</label>
+        <input
+          type="text"
+          class="form-control"
+          id="fullName"
+          required
+          ng-model="user.fullName"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="numberPhone" class="form-label">Số điện thoại</label>
+        <input
+          type="text"
+          class="form-control"
+          id="numberPhone"
+          required
+          ng-model="user.numberPhone"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          required
+          ng-model="user.email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          required
+          ng-model="user.password"
+        />
+      </div>
+      <!-- <div ng-if="formInvalid" class="text-danger">{{formInvalidMessage}}</div> -->
+      <button ng-click="handleRegister()" class="btn btn-primary">
+        Đăng ký
+      </button>
+    </form>
+  </div>
+</main>

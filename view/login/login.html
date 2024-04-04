@@ -1,0 +1,30 @@
+<main class="mt-4 row position-relative">
+  <div class="col border rounded p-5">
+    <h2 class="mb-3 text-center">Đăng nhập</h2>
+    <form class="d-flex justify-content-center flex-column">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          required
+          ng-model="user.email"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          ng-model="user.password"
+        />
+      </div>
+      <button type="submit" ng-click="handleLogin()" class="btn btn-primary">
+        Đăng nhập
+      </button>
+    </form>
+  </div>
+</main>

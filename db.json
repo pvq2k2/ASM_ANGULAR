@@ -1,5 +1,13 @@
 {
-    "users": [],
-    "product": [],
-    "categories": []
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Quyết Phạm",
+      "numberPhone": "02134323454",
+      "email": "quyetpvph15476@fpt.edu.vn",
+      "password": "1"
+    }
+  ],
+  "products": [],
+  "categories": []
 }
