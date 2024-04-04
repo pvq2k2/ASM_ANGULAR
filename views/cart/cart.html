@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col">
+    <div class="text-center mt-5 d-flex justify-content-between">
+      <h2 class="mb-4">Giỏ hàng</h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Hình</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr ng-repeat="cart in carts" ng-if="carts && carts.length > 0">
+            <td>{{cart.id}}</td>
+            <td>{{cart.name}}</td>
+            <td>{{cart.price}}</td>
+            <td>
+              <img src="{{cart.image}}" width="100px" height="100px" />
+            </td>
+            <td>
+              <div class="d-flex justify-content-between align-items-center">
+                <button
+                  class="btn btn-primary btn-sm"
+                  ng-click="decreaseQuantity(cart)"
+                >
+                  -
+                </button>
+                <span>{{cart.quantity}}</span>
+                <button
+                  class="btn btn-primary btn-sm"
+                  ng-click="increaseQuantity(cart)"
+                >
+                  +
+                </button>
+              </div>
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="onDelete(cart.id)">
+                Xóa
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        ng-if="!carts || carts.length === 0"
+        class="text-center mt-3 border-1 d-flex justify-content-center align-items-center gap-3 py-3"
+      >
+        <i class="fa-solid fa-database fs-1"></i>
+        <span class="text-center fs-5">Không có dữ liệu</span>
+      </div>
+    </div>
+  </div>
+</div>

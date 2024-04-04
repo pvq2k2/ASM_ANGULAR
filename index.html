@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home page</title>
     <!-- Nhúng boostrap -->
-    <link rel="stylesheet" href="../lib/bootstrap.css" />
-    <script src="../lib/bootstrap.js"></script>
+    <link rel="stylesheet" href="./libs/bootstrap.css" />
+    <script src="./libs/bootstrap.js"></script>
     <!-- Nhúng icon -->
-    <script src="../lib/font-fontawesome-ae333ffef2.js"></script>
+    <script src="./libs/font-fontawesome-ae333ffef2.js"></script>
     <!-- Nhúng angular js -->
-    <script src="../lib/angular.js"></script>
+    <script src="./libs/angular.js"></script>
     <!-- Nhúng thư viện angular-route. Lưu ý: khai báo angular-route sau angular.js -->
-    <script src="../lib/angular-route.js"></script>
+    <script src="./libs/angular-route.js"></script>
   </head>
   <body ng-app="myApp">
     <div class="container">
@@ -71,7 +71,7 @@
               aria-expanded="false"
             >
               <img
-                src="https://github.com/mdo.png"
+                src="{{img}}"
                 alt="mdo"
                 width="32"
                 height="32"
@@ -93,20 +93,23 @@
                 >
               </li>
               <li>
-                <a ng-show="isLoggedIn" class="dropdown-item" href="#"
+                <a
+                  ng-show="isLoggedIn"
+                  class="dropdown-item"
+                  href="#!/admin/products"
                   >Trang quản trị</a
                 >
               </li>
               <li>
-                <a ng-show="isLoggedIn" class="dropdown-item" href="#"
+                <a ng-show="isLoggedIn" class="dropdown-item" href="#!/cart"
                   >Giỏ hàng</a
                 >
               </li>
-              <li>
+              <!-- <li>
                 <a ng-show="isLoggedIn" class="dropdown-item" href="#"
                   >Thông tin tài khoản</a
                 >
-              </li>
+              </li> -->
               <li><hr ng-show="isLoggedIn" class="dropdown-divider" /></li>
               <li>
                 <a
@@ -242,44 +245,91 @@
         </div>
       </footer>
     </div>
+    <script>
+      document.title = "Trang chủ";
+      var myApp = angular.module("myApp", ["ngRoute"]);
+
+      // Khai báo routeProvider
+      myApp.config(function ($routeProvider) {
+        $routeProvider
+          .when("/", {
+            templateUrl: "views/home/home.html",
+            controller: "HomeController",
+          })
+          .when("/detail/:id", {
+            templateUrl: "./views/detailProduct/detailProduct.html",
+            controller: "DetailProductController",
+          })
+          .when("/cart", {
+            templateUrl: "views/cart/cart.html",
+            controller: "CartController",
+          })
+          .when("/login", {
+            templateUrl: "views/login/login.html",
+            controller: "LoginController",
+          })
+          .when("/register", {
+            templateUrl: "views/register/register.html",
+            controller: "RegisterController",
+          })
+          .when("/admin/products", {
+            templateUrl: "views/admin/products/list/productList.html",
+            controller: "ProductListController",
+          })
+          .when("/admin/products/create", {
+            templateUrl: "views/admin/products/create/productCreate.html",
+            controller: "ProductCreateController",
+          })
+          .when("/admin/products/update/:id", {
+            templateUrl: "views/admin/products/update/ProductUpdate.html",
+            controller: "ProductUpdateController",
+          })
+          .when("/admin/categories", {
+            templateUrl: "views/admin/categories/list/categoriesList.html",
+            controller: "CategoriesListController",
+          })
+          .when("/admin/categories/create", {
+            templateUrl: "views/admin/categories/create/categoriesCreate.html",
+            controller: "CategoriesCreateController",
+          })
+          .when("/admin/categories/update/:id", {
+            templateUrl: "views/admin/categories/update/categoriesUpdate.html",
+            controller: "CategoriesUpdateController",
+          })
+          .otherwise({
+            redirectTo: "views/home/home.html",
+          });
+      });
+    </script>
+    <script>
+      myApp.controller("myController", function ($scope) {
+        if (localStorage.getItem("user")) {
+          $scope.img = "https://github.com/mdo.png";
+          $scope.user = JSON.parse(localStorage.getItem("user"));
+          $scope.isLoggedIn = true;
+        } else {
+          $scope.img = "./images/default-avatar.png";
+          $scope.isLoggedIn = false;
+        }
+
+        $scope.logOut = () => {
+          $scope.img = "./images/default-avatar.png";
+          $scope.user = "";
+          $scope.isLoggedIn = false;
+          localStorage.removeItem("user");
+        };
+      });
+    </script>
+    <script src="./views/home/homeController.js"></script>
+    <script src="./views/cart/cartController.js"></script>
+    <script src="./views/detailProduct/detailProductController.js"></script>
+    <script src="./views/register/registerController.js"></script>
+    <script src="./views/login/loginController.js"></script>
+    <script src="./views/admin/products/list/productListController.js"></script>
+    <script src="./views/admin/products/create/productCreateController.js"></script>
+    <script src="./views/admin/categories/list/categoriesListController.js"></script>
+    <script src="./views/admin/categories/create/categoriesCreateController.js"></script>
+    <script src="./views/admin/categories/update/categoriesUpdateController.js"></script>
+    <script src="./views/admin/products/update/productUpdateController.js"></script>
   </body>
 </html>
-
-<script>
-  var myApp = angular.module("myApp", ["ngRoute"]);
-  myApp.controller("myController", function ($scope) {
-    if (localStorage.getItem("user")) {
-      $scope.user = JSON.parse(localStorage.getItem("user"));
-      $scope.isLoggedIn = true;
-    } else {
-      $scope.isLoggedIn = false;
-    }
-
-    $scope.logOut = () => {
-      $scope.user = "";
-      $scope.isLoggedIn = false;
-      localStorage.removeItem("user");
-    };
-  });
-  // Khai báo routeProvider
-  myApp.config(function ($routeProvider) {
-    $routeProvider
-      .when("/", {
-        templateUrl: "view/home/home.html",
-        // controller: ListController,
-      })
-      .when("/login", {
-        templateUrl: "view/login/login.html",
-        controller: "LoginController",
-      })
-      .when("/register", {
-        templateUrl: "view/register/register.html",
-        controller: "RegisterController",
-      })
-      .otherwise({
-        redirectTo: "/",
-      });
-  });
-</script>
-<script src="./view/register/registerController.js"></script>
-<script src="./view/login/loginController.js"></script>

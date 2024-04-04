@@ -54,7 +54,7 @@
   </button>
 </div>
 
-<main class="mt-4 row position-relative">
+<!-- <main class="mt-4 row position-relative">
   <div class="col">
     <div class="row gap-3 row-cols-1">
       <a
@@ -156,29 +156,13 @@
     </div>
   </div>
   <aside class="col-sm-3">
-    <div class="card poly-cart">
-      <div class="card-body">
-        <div class="row">
-          <form>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="search"
-              name=""
-              id=""
-            />
-          </form>
-        </div>
-      </div>
-    </div>
-
     <div class="card poly-card">
       <div class="card-header">
         <span
           class="glyphicon glyphicon-th-list"
           style="margin-right: 5px"
         ></span
-        >Chủng loại
+        >Danh mục
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Điện thoại di động</li>
@@ -190,4 +174,21 @@
       </ul>
     </div>
   </aside>
+</main> -->
+
+<main class="mt-4 position-relative">
+  <div class="row gap-3">
+    <div ng-repeat="product in products" class="card col text-decoration-none">
+      <div
+        ng-click="onDetail(product.id)"
+        style="width: 18rem; cursor: pointer"
+      >
+        <img ng-src="{{product.image}}" class="card-img-top" height="200px" />
+        <div class="card-body">
+          <p class="card-text fw-bold fs-5">{{product.name}}</p>
+          <span class="fs-6 fw-bold text-danger">{{product.price}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

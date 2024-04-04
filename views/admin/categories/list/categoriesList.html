@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col">
+    <div class="text-center mt-5 d-flex justify-content-between">
+      <h2 class="mb-4">Danh sách danh mục</h2>
+      <a href="#!admin/categories/create">
+        <button
+          class="btn btn-primary d-flex justify-content-center align-items-center gap-2"
+        >
+          <i class="fa-solid fa-plus"></i> <span>Thêm mới</span>
+        </button>
+      </a>
+    </div>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Hành động</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr
+            ng-repeat="category in categories"
+            ng-if="categories && categories.length > 0"
+          >
+            <td>{{category.id}}</td>
+            <td>{{category.name}}</td>
+            <td>
+              <button
+                class="btn btn-warning me-2"
+                ng-click="onEdit(category.id)"
+              >
+                Sửa
+              </button>
+              <button class="btn btn-danger" ng-click="onDelete(category.id)">
+                Xóa
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div
+        ng-if="!categories || categories.length === 0"
+        class="text-center mt-3 border-1 d-flex justify-content-center align-items-center gap-3 py-3"
+      >
+        <i class="fa-solid fa-database fs-1"></i>
+        <span class="text-center fs-5">Không có dữ liệu</span>
+      </div>
+    </div>
+  </div>
+</div>

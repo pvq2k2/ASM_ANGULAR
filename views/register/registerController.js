@@ -32,12 +32,14 @@ myApp.controller("RegisterController", function ($scope, $http, $location) {
       }
       const result = response.data;
       $scope.user.id = result.length + 1;
-      await $http.post(apiUrl, $scope.user);
-      alert("Đăng ký thành công !");
-      $location.url("/login");
-      location.href = `${$location.absUrl()}`;
+      await $http.post(apiUrl, $scope.user).then((res) => {
+        if (res.status == 201) {
+          alert("Đăng ký thành công !");
+          $location.path("/login");
+        }
+      });
     } catch (error) {
-      alert(error);
+      alert(JSON.stringify(error));
     }
   };
 });
