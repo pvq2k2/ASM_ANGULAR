@@ -43,7 +43,7 @@ myApp.controller("RegisterController", function ($scope, $http, $location) {
           return;
         }
         const result = response.data;
-        $scope.user.id = result.length + 1;
+        $scope.user.id = `${result.length + 1}`;
         await $http.post(apiUrl, $scope.user).then((res) => {
           if (res.status == 201) {
             alert("Đăng ký thành công !");
